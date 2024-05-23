@@ -7,7 +7,6 @@ export class ApiFeatures {
   }
 
   async create(url, payload) {
-    console.log(this.path);
     const { data, msg } = await this.api
       .post(this.path + url, payload)
       .then((res) => res.data)

@@ -11,83 +11,69 @@ import { routes } from "./routes";
 import PropTypes from "prop-types";
 
 const CreateIcon = ({ MyIcon }) => {
-  return (
-    <>
-      {MyIcon && <MyIcon sx={[{ color: "black" }]} />}{" "}
-      {/* Render the icon component if it exists */}
-    </>
-  );
+  return MyIcon ? <MyIcon sx={{ color: "black" }} /> : null;
+};
+
+CreateIcon.propTypes = {
+  MyIcon: PropTypes.elementType.isRequired,
 };
 
 export const Sidebar = () => {
   const [open, setOpen] = useState(-1);
   const navigate = useNavigate();
-  const handleOpen = (value) => {
-    setOpen(open === value ? -1 : value);
+
+  const handleOpen = (index) => {
+    setOpen(open === index ? -1 : index);
   };
 
   return (
-    <>
-      {routes?.map((route, mainIndex) => {
+    <List>
+      {routes.map((route, mainIndex) => {
         const { path, name, icon, subMenu } = route;
 
         return (
-          <List key={mainIndex}>
+          <div key={mainIndex}>
             <ListItemButton
               onClick={() => {
-                path ? navigate(path) : handleOpen(mainIndex);
+                if (path) {
+                  navigate(path);
+                } else {
+                  handleOpen(mainIndex);
+                }
               }}
             >
-              <ListItemIcon>{<CreateIcon MyIcon={icon} />}</ListItemIcon>
-
-              <ListItemText
-                primary={name}
-                onClick={() => {
-                  path && navigate(path);
-                }}
-              />
-
-              {subMenu && open === mainIndex ? (
-                <ExpandLess />
-              ) : (
-                subMenu && <ExpandMore />
-              )}
+              <ListItemIcon>
+                <CreateIcon MyIcon={icon} />
+              </ListItemIcon>
+              <ListItemText primary={name} />
+              {subMenu ? (open === mainIndex ? <ExpandLess /> : <ExpandMore />) : null}
             </ListItemButton>
-            {subMenu &&
-              subMenu.map((subRoutes, index) => {
-                const { path, name, icon } = subRoutes;
-                return (
-                  <div key={index}>
-                    <Collapse
-                      in={open === mainIndex}
-                      timeout='auto'
-                      unmountOnExit
-                    >
-                      <List component='div' disablePadding>
-                        <ListItemButton
-                          sx={{ pl: 4 }}
-                          onClick={() => {
-                            path && navigate(path);
-                          }}
-                        >
-                          <ListItemIcon>
-                            <CreateIcon MyIcon={icon} />
-                          </ListItemIcon>
-                          <ListItemText primary={name} />
-                        </ListItemButton>
-                      </List>
-                    </Collapse>
-                  </div>
-                );
-              })}
-          </List>
+            {subMenu && (
+              <Collapse in={open === mainIndex} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {subMenu.map((subRoute, index) => {
+                    const { path, name, icon } = subRoute;
+                    return (
+                      <ListItemButton
+                        key={index}
+                        sx={{ pl: 4 }}
+                        onClick={() => {
+                          navigate(path);
+                        }}
+                      >
+                        <ListItemIcon>
+                          <CreateIcon MyIcon={icon} />
+                        </ListItemIcon>
+                        <ListItemText primary={name} />
+                      </ListItemButton>
+                    );
+                  })}
+                </List>
+              </Collapse>
+            )}
+          </div>
         );
       })}
-      <List></List>
-    </>
+    </List>
   );
-};
-
-CreateIcon.propTypes = {
-  MyIcon: PropTypes.elementType.isRequired,
 };
