@@ -1,7 +1,3 @@
-export const Assignment = (props) => {
-  const { token, userRole } = props;
-
-  console.log(token, userRole);
-
+export const Assignment = () => {
   return <div>Assignments</div>;
 };
