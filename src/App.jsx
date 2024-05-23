@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useResponsive } from "./Hooks/use-responsive";
 import { SideDrawer } from "./Components/Drawer/Drawer";
-import { Assignment } from "./Pages/indexPages";
+import { Assignment, Course } from "./Pages/indexPages";
 import PropTypes from "prop-types";
 
 const drawerWidth = 240;
@@ -19,8 +19,12 @@ function App() {
           >
             <Routes>
               <Route
-                path='/'
+                path='/assignment'
                 element={<GuardComponents component={Assignment} />}
+              />
+              <Route
+                path='/courses'
+                element={<GuardComponents component={Course} />}
               />
             </Routes>
           </div>
