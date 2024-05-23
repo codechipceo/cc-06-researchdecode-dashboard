@@ -18,7 +18,6 @@ export const useResponsive = () => {
 
     window.addEventListener("resize", determineDeviceType);
 
-    console.log(deviceType);
     return () => {
       window.removeEventListener("resize", determineDeviceType);
     };
