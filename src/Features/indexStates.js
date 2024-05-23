@@ -1,26 +1,26 @@
 import {
-  categoriesData,
-  categoriesTotalCount,
-  categoryErrorMsg,
-  categoryIsError,
-    categoryLoading,
-    getAllCategories,
-  createCategory
-} from "./Slices/categorySlice";
+  selectAdminInfo,
+  selectAdminLoading,
+  selectAdminErrorMsg,
+  selectAdminIsError,
+  selectAdminIsLoggedIn,
+  adminLogin,
+  
+} from "./Slices/adminSlice";
 
 const reduxStore = {
   states: {
-    categoriesData,
-    categoriesTotalCount,
-    categoryErrorMsg,
-    categoryIsError,
-    categoryLoading,
+    adminInfo: selectAdminInfo,
+    adminLoading: selectAdminLoading,
+    adminErrorMsg: selectAdminErrorMsg,
+    adminIsError: selectAdminIsError,
+    adminIsLoggedIn: selectAdminIsLoggedIn,
   },
 
-    sliceMethods: {
-        getAllCategories,
-        createCategory
+  sliceMethods: {
+    adminLogin,
+  
   },
 };
 
-export {reduxStore} ;
+export { reduxStore };

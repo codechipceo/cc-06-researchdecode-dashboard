@@ -1,9 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { categorySlice } from "../Features/indexSlice";
+import {  adminSlice } from "../Features/indexSlice";
 
 const reducers = combineReducers({
-  categories: categorySlice,
+  admin: adminSlice,
 });
+
 export const store = configureStore({
   reducer: reducers,
 });

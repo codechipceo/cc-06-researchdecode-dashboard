@@ -1,3 +1,3 @@
-import { categorySlice } from "./Slices/categorySlice";
+import { adminSlice } from "./Slices/adminSlice";
 
-export {categorySlice}
+export {adminSlice}

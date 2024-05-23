@@ -1,5 +1,5 @@
 
-export const Assignments = () => {
+export const Assignment = () => {
   return (
     <div>Assignments</div>
   )
