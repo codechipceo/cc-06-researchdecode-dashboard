@@ -71,18 +71,8 @@ export const routes = [
     icon: LocalShippingSharpIcon,
   },
   {
-    name: "Customers",
-    path: "/customers",
-    icon: PersonAddAltSharpIcon,
-  },
-  {
     name: "Employees",
     path: "/employees",
     icon: SupportAgentSharpIcon,
-  },
-  {
-    name: "Modules",
-    path: "/modules",
-    icon: ViewModuleSharpIcon,
-  },
+  }
 ];

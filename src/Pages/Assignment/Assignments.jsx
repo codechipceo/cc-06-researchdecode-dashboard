@@ -1,3 +1,11 @@
+import DataTable from "../../Components/DataTable/DataTable";
+
+
 export const Assignment = () => {
-  return <div>Assignments</div>;
+
+_
+  return <div>
+   
+    <DataTable rows={rows} columns={columns}/>
+  </div>;
 };

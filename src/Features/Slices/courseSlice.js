@@ -147,7 +147,7 @@ export const courseSlice = createSlice({
       .addCase(updateCourse.fulfilled, (state, action) => {
         state.isLoading = false;
         const index = state.courses.findIndex(
-          (course) => course.id === action.payload.data.id
+          (course) => course._id === action.payload.data._id
         );
         if (index !== -1) {
           state.courses[index] = action.payload.data;
@@ -160,6 +160,8 @@ export const courseSlice = createSlice({
       })
 
       // deleteCourse
+      
+      
       .addCase(deleteCourse.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -168,7 +170,7 @@ export const courseSlice = createSlice({
       .addCase(deleteCourse.fulfilled, (state, action) => {
         state.isLoading = false;
         state.courses = state.courses.filter(
-          (course) => course.id !== action.payload.data.id
+          (course) => course._id !== action.payload.data._id
         );
       })
       .addCase(deleteCourse.rejected, (state, action) => {
@@ -176,6 +178,9 @@ export const courseSlice = createSlice({
         state.isError = true;
         state.errorMessage = action.payload;
       });
+
+      
+      
   },
 }).reducer;
 
