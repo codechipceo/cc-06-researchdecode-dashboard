@@ -19,7 +19,7 @@ function App() {
           >
             <Routes>
               <Route
-                path='/assignment'
+                path='/assignments'
                 element={<GuardComponents component={Assignment} />}
               />
               <Route
