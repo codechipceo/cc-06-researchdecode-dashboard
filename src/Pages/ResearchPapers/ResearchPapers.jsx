@@ -1,7 +1,7 @@
-import React from 'react'
+import { useResearchPaper } from "../../Hooks/use-researchPaper";
 
 export const ResearchPapers = () => {
-  return (
-    <div>ResearchPapers</div>
-  )
-}
+  const { hooksInstance, researchPaperData } = useResearchPaper();
+  console.log(researchPaperData);
+  return <div></div>;
+};
