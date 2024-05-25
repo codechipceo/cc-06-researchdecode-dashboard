@@ -15,7 +15,7 @@ function App() {
         <div style={{ display: "flex" }}>
           <SideDrawer />
           <div
-            style={{ marginLeft: deviceType === "MOBILE" ? 0 : drawerWidth }}
+            style={{ marginLeft: deviceType === "MOBILE" ? 0 : drawerWidth, width:"100vw" }}
           >
             <Routes>
               <Route
