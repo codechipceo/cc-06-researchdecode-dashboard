@@ -1,9 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { adminSlice, courseSlice } from "../Features/indexSlice";
+import {
+  adminSlice,
+  courseSlice,
+  researchPaperSlice,
+} from "../Features/indexSlice";
 
 const reducers = combineReducers({
   admin: adminSlice,
   course: courseSlice,
+  researchPaper: researchPaperSlice,
 });
 
 export const store = configureStore({
