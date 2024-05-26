@@ -11,6 +11,7 @@ export const createCourse = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("create", payload);
+      console.log(data,msg);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -52,6 +53,7 @@ export const updateCourse = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("update", payload);
+      console.log(data);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -145,6 +147,7 @@ export const courseSlice = createSlice({
         state.errorMessage = "";
       })
       .addCase(updateCourse.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.isLoading = false;
         const index = state.courses.findIndex(
           (course) => course._id === action.payload.data._id

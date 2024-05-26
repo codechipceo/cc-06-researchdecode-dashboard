@@ -20,6 +20,7 @@ export const useCourse = () => {
   };
 
   const update = (courseData) => {
+    console.log("updating",courseData);
     dispatch(updateCourse(courseData));
   };
 

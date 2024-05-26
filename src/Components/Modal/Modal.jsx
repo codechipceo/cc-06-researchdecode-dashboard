@@ -16,49 +16,8 @@ const Modal = ({ open, handleClose, handleSave }) => {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Create a New Course</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Please fill out the form below to create a new course.
-        </DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="Course Name"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={courseName}
-          onChange={(e) => setCourseName(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Course Description"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={courseDescription}
-          onChange={(e) => setCourseDescription(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Price"
-          type="number"
-          fullWidth
-          variant="outlined"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Course Language"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={courseLanguage}
-          onChange={(e) => setCourseLanguage(e.target.value)}
-        />
-      </DialogContent>
+      <DialogTitle>{title}</DialogTitle>
+    {children}
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Cancel

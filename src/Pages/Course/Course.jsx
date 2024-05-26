@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCourse } from "../../Hooks/use-course";
 import DataTable from "../../Components/DataTable/DataTable";
 import Modal from "../../Components/Modal/Modal";
@@ -18,20 +18,25 @@ export const Course = () => {
   const [showModal, setModal] = useState(false);
   const [currentCourse, setCurrentCourse] = useState(null);
 
-  const handleEdit = (courseId) => {};
+  const handleEdit = (course) => {
+    const  updatePayload  ={ courseId:course.id , ...course}
+    update(updatePayload)
+    setModal(true);
+  };
 
-  const handleDelete = (courseId) => {};
+  const handleDelete = (courseId) => {
+    deleteCourseById(courseId);
+  };
 
-  const handleSave = (courseData) => {};
+  const handleSave = (courseData) => {
+    if (currentCourse) {
+      update({ ...courseData, id: currentCourse._id });
+    } else {
+      create(courseData);
+    }
+    setModal(false);
+  };
 
-  const fields = [
-    { _id: 1, name: "courseName", label: "Course Name", type: "text" },
-    { _id: 2, name: "courseDescription", label: "Description", type: "text" },
-    { _id: 3, name: "price", label: "Price", type: "number" },
-    { _id: 4, name: "courseLanguage", label: "Language", type: "text" },
-    { _id: 5, name: "enrolledCount", label: "Enrolled Count", type: "number" },
-    { _id: 6, name: "isActive", label: "Active" },
-  ];
 
   const columns = [
     { field: "id", headerName: "ID", flex: 1 },
@@ -58,6 +63,48 @@ export const Course = () => {
 
   return (
     <div className='w-full'>
+        <DialogContent>
+        <DialogContentText>
+         {subTitle}
+        </DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          label="Course Name"
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={courseName}
+          onChange={(e) => setCourseName(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          label="Course Description"
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={courseDescription}
+          onChange={(e) => setCourseDescription(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          label="Price"
+          type="number"
+          fullWidth
+          variant="outlined"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          label="Course Language"
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={courseLanguage}
+          onChange={(e) => setCourseLanguage(e.target.value)}
+        />
+      </DialogContent>
       <button
         onClick={() => {
           setCurrentCourse(null);
@@ -68,7 +115,7 @@ export const Course = () => {
       </button>
       <DataTable
         columns={columns}
-        rows={fields}
+        rows={courseData}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
       />
@@ -77,7 +124,7 @@ export const Course = () => {
         handleClose={() => setModal(false)}
         handleSave={handleSave}
         initialData={currentCourse}
-        fields={fields}
+        fields={courseData}
       />
     </div>
   );
