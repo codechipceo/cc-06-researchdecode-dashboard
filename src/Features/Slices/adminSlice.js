@@ -10,8 +10,9 @@ export const adminLogin = createAsyncThunk(
   "admin/signIn",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg  } = await apiFeature.create("signIn", payload);
-      
+      const { data, msg } = await apiFeature.create("signIn", payload);
+      localStorage.setItem("adminToken", data.token);
+
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -20,7 +21,6 @@ export const adminLogin = createAsyncThunk(
   }
 );
 
-
 // Initial state for admin login slice
 const initialState = {
   adminInfo: null,
@@ -28,7 +28,7 @@ const initialState = {
   isError: false,
   errorMessage: "",
   isLoggedIn: false,
-  adminToken:null
+  adminToken: localStorage.getItem("adminToken"),
 };
 
 // Create admin slice with reducers and extraReducers
@@ -39,7 +39,7 @@ export const adminSlice = createSlice({
     logout: (state) => {
       state.adminInfo = null;
       state.isLoggedIn = false;
-      state.adminToken = null
+      state.adminToken = null;
     },
   },
   extraReducers: (builder) => {
@@ -57,8 +57,7 @@ export const adminSlice = createSlice({
         state.errorMessage = payload;
         state.isError = true;
         state.isLoading = false;
-      })
-      
+      });
   },
 }).reducer;
 

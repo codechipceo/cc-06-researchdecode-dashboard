@@ -1,31 +1,33 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes,  } from "react-router-dom";
 import { useResponsive } from "./Hooks/use-responsive";
 import { SideDrawer } from "./Components/Drawer/Drawer";
-import { Assignment, Course ,Login} from "./Pages/indexPages";
+import { Assignment, Course, Login, Dashboard } from "./Pages/indexPages";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { selectAdminToken } from "./Features/Slices/adminSlice";
-import { Dashboard } from "./Pages/Dashboard/Dashboard";
 
-
-const drawerWidth = 240;
 
 function App() {
   const deviceType = useResponsive();
-   const token = useSelector(selectAdminToken);
-console.log(token);
+  const token = useSelector(selectAdminToken);
+  console.log(token)
+  const drawerWidth = token ? 240 :0;
+
   return (
     <>
       <BrowserRouter>
         <div style={{ display: "flex" }}>
-        {token && <SideDrawer   drawerWidth={drawerWidth} />}
+          {token ? <SideDrawer drawerWidth={drawerWidth} /> :""}
           <div
-            style={{ marginLeft: deviceType === "MOBILE" ? 0 : drawerWidth, width:"100vw" }}
+            style={{
+              marginLeft: deviceType === "MOBILE"  ? 0 : drawerWidth,
+              width: "100vw",
+            }}
           >
             <Routes>
-            <Route
+              <Route
                 path='/'
-                element={token? <Dashboard/>:<Login/>} 
+                element={<GuardComponents component={Dashboard} />}
               />
               <Route
                 path='/assignments'
@@ -47,13 +49,10 @@ export default App;
 
 function GuardComponents({ component: Component }) {
   const token = useSelector(selectAdminToken);
-  const navigate=useNavigate()
 
-    if(!token){
-      navigate("/login")
-      
-    }
-
+  if (!token) {
+    return <Login />;
+  }
 
   // condition
   const rest = {

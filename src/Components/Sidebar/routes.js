@@ -1,17 +1,15 @@
 import Dashboard from "@mui/icons-material/Dashboard";
 // import CategorySharpIcon from "@mui/icons-material/CategorySharp";
-import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
-import SupportAgentSharpIcon from "@mui/icons-material/SupportAgentSharp";
-import PersonAddAltSharpIcon from "@mui/icons-material/PersonAddAltSharp";
-import ViewModuleSharpIcon from "@mui/icons-material/ViewModuleSharp";
-import CallSplitSharpIcon from "@mui/icons-material/CallSplitSharp";
 import AssignmentSharpIcon from "@mui/icons-material/AssignmentSharp";
-import SchoolSharpIcon from "@mui/icons-material/SchoolSharp";
-import ScienceSharpIcon from "@mui/icons-material/ScienceSharp";
-import PersonSharpIcon from "@mui/icons-material/PersonSharp";
+import CallSplitSharpIcon from "@mui/icons-material/CallSplitSharp";
+import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 import MenuBookSharpIcon from "@mui/icons-material/MenuBookSharp";
 import PeopleSharpIcon from "@mui/icons-material/PeopleSharp";
+import PersonSharpIcon from "@mui/icons-material/PersonSharp";
+import SchoolSharpIcon from "@mui/icons-material/SchoolSharp";
+import ScienceSharpIcon from "@mui/icons-material/ScienceSharp";
 import SubjectSharpIcon from "@mui/icons-material/SubjectSharp";
+import SupportAgentSharpIcon from "@mui/icons-material/SupportAgentSharp";
 import VideoLibrarySharpIcon from "@mui/icons-material/VideoLibrarySharp";
 
 export const routes = [

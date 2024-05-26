@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import useLogin from "../../Hooks/use-login";
+import  {  useState } from "react";
+import useLogin from "../../Hooks/use-logIn";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+
 
 function Copyright(props) {
   return (
@@ -41,21 +41,21 @@ export const Login = () => {
   const {
     isLoading,
     errorMessage,
-    isLoggedIn,
+
     isError,
     handleLogin,
   } = useLogin();
-  const navigate = useNavigate();
-  
-   
-  ;
+
+
+
+
 
   const loginObj = {
     email,
     password,
   };
 
-  
+
 const handleSubmit=(e)=>{
   e.preventDefault()
  handleLogin(loginObj)
@@ -119,7 +119,7 @@ const handleSubmit=(e)=>{
             <Button
               type="submit"
               fullWidth
-              variant="contained" 
+              variant="contained"
               onClick={(e)=>handleSubmit(e)}
               sx={{ mt: 3, mb: 2 }}
               disabled={isLoading} // Disable button while loading
