@@ -3,14 +3,15 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("admin", "auth", axiosInstance);
+const apiFeature = new ApiFeatures("admin", "profile", axiosInstance);
 
 // Async thunk for admin login
 export const adminLogin = createAsyncThunk(
-  "admin/login",
+  "admin/signIn",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("login", payload);
+      const { data, msg  } = await apiFeature.create("signIn", payload);
+      
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -27,7 +28,7 @@ const initialState = {
   isError: false,
   errorMessage: "",
   isLoggedIn: false,
-  adminToken:""
+  adminToken:null
 };
 
 // Create admin slice with reducers and extraReducers
@@ -38,12 +39,14 @@ export const adminSlice = createSlice({
     logout: (state) => {
       state.adminInfo = null;
       state.isLoggedIn = false;
+      state.adminToken = null
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(adminLogin.fulfilled, (state, { payload }) => {
         state.adminInfo = payload.data;
+        state.adminToken = payload.data.token;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
@@ -65,3 +68,4 @@ export const selectAdminLoading = (state) => state.admin.isLoading;
 export const selectAdminErrorMsg = (state) => state.admin.errorMessage;
 export const selectAdminIsError = (state) => state.admin.isError;
 export const selectAdminIsLoggedIn = (state) => state.admin.isLoggedIn;
+export const selectAdminToken = (state) => state.admin.adminToken;
