@@ -3,11 +3,11 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("admin", "course", axiosInstance);
+const apiFeature = new ApiFeatures("admin", "subject", axiosInstance);
 
-// Async thunk for  creating course 
-export const createCourse = createAsyncThunk(
-  "course/create", 
+// Async thunk for creating subject
+export const createSubject = createAsyncThunk(
+  "subject/create",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("create", payload);
@@ -19,12 +19,12 @@ export const createCourse = createAsyncThunk(
     }
   }
 );
-// GET ALL COURSE
-export const getAllCourse = createAsyncThunk(
-  "course/getall",
+// GET ALL SUBJECTS
+export const getAllSubject = createAsyncThunk(
+  "subject/getall",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg, count } = await apiFeature.create("getAll", payload);
+      const { data, msg, count } = await apiFeature.getAll("getAll", payload);
       return { data, msg, count };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -34,11 +34,11 @@ export const getAllCourse = createAsyncThunk(
 );
 
 // GET BY ID
-export const getByIdCourse = createAsyncThunk(
-  "course/getById",
+export const getByIdSubject = createAsyncThunk(
+  "subject/getById",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("getById", payload);
+      const { data, msg } = await apiFeature.getById("getById", payload);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -47,12 +47,12 @@ export const getByIdCourse = createAsyncThunk(
   }
 );
 
-// UPDATE COURSE
-export const updateCourse = createAsyncThunk(
-  "course/update",
+// UPDATE SUBJECT
+export const updateSubject = createAsyncThunk(
+  "subject/update",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("update", payload);
+      const { data, msg } = await apiFeature.update("update", payload);
       console.log(data);
       return { data, msg };
     } catch (error) {
@@ -62,12 +62,12 @@ export const updateCourse = createAsyncThunk(
   }
 );
 
-// DELETE COURSE
-export const deleteCourse = createAsyncThunk(
-  "course/delete",
+// DELETE SUBJECT
+export const deleteSubject = createAsyncThunk(
+  "subject/delete",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("delete", payload);
+      const { data, msg } = await apiFeature.delete("delete", payload);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -78,105 +78,105 @@ export const deleteCourse = createAsyncThunk(
 
 const initialState = {
   totalCount: 0,
-  courses: [],
-  courseById: {},
+  subjects: [],
+  subjectById: {},
   isLoading: false,
   isError: false,
   errorMessage: "",
 };
 
-export const courseSlice = createSlice({
-  name: "courseSlice",
+export const subjectSlice = createSlice({
+  name: "subjectSlice",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // createCourse
-      .addCase(createCourse.pending, (state) => {
+      // createSubject
+      .addCase(createSubject.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.errorMessage = "";
       })
-      .addCase(createCourse.fulfilled, (state, action) => {
+      .addCase(createSubject.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courses.push(action.payload.data);
+        state.subjects.push(action.payload.data);
       })
-      .addCase(createCourse.rejected, (state, action) => {
+      .addCase(createSubject.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
 
-      // getAllCourse
-      .addCase(getAllCourse.pending, (state) => {
+      // getAllsubject
+      .addCase(getAllSubject.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.errorMessage = "";
       })
-      .addCase(getAllCourse.fulfilled, (state, action) => {
+      .addCase(getAllSubject.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courses = action.payload.data;
+        state.subjects = action.payload.data;
         state.totalCount = action.payload.count;
       })
-      .addCase(getAllCourse.rejected, (state, action) => {
+      .addCase(getAllSubject.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
 
-      // getByIdCourse
-      .addCase(getByIdCourse.pending, (state) => {
+      // getByIdSubject
+      .addCase(getByIdSubject.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.errorMessage = "";
       })
-      .addCase(getByIdCourse.fulfilled, (state, action) => {
+      .addCase(getByIdSubject.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courseById = action.payload.data;
+        state.subjectById = action.payload.data;
       })
-      .addCase(getByIdCourse.rejected, (state, action) => {
+      .addCase(getByIdSubject.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
 
-      // updateCourse
-      .addCase(updateCourse.pending, (state) => {
+      // updateSubject
+      .addCase(updateSubject.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.errorMessage = "";
       })
-      .addCase(updateCourse.fulfilled, (state, action) => {
+      .addCase(updateSubject.fulfilled, (state, action) => {
         console.log(action.payload);
         state.isLoading = false;
-        const index = state.courses.findIndex(
-          (course) => course._id === action.payload.data._id
+        const index = state.subjects.findIndex(
+          (subject) => subject._id === action.payload.data._id
         );
         if (index !== -1) {
-          state.courses[index] = action.payload.data;
+          state.subjects[index] = action.payload.data;
         }
       })
-      .addCase(updateCourse.rejected, (state, action) => {
+      .addCase(updateSubject.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
 
-      // deleteCourse
+      // deletesubject
       
       
-      .addCase(deleteCourse.pending, (state) => {
+      .addCase(deleteSubject.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.errorMessage = "";
       })
-      .addCase(deleteCourse.fulfilled, (state, action) => {
+      .addCase(deleteSubject.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courses = state.courses.filter(
-          (course) => course._id !== action.payload.data._id
+        state.subjects = state.subjects.filter(
+          (subject) => subject._id !== action.payload.data._id
         );
       })
-      .addCase(deleteCourse.rejected, (state, action) => {
+      .addCase(deleteSubject.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
@@ -188,9 +188,9 @@ export const courseSlice = createSlice({
 }).reducer;
 
 // Selectors
-export const selectAllCourses = (state) => state.course.courses;
-export const selectCourseById = (state) => state.course.courseById;
-export const selectCourseLoading = (state) => state.course.isLoading;
-export const selectCourseError = (state) => state.course.isError;
-export const selectCourseErrorMessage = (state) => state.course.errorMessage;
-export const selectTotalCount = (state) => state.course.totalCount;
+export const selectAllSubjects = (state) => state.subject.subjects;
+export const selectSubjectById = (state) => state.subject.subjectById;
+export const selectSubjectLoading = (state) => state.subject.isLoading;
+export const selectSubjectError = (state) => state.subject.isError;
+export const selectSubjectErrorMessage = (state) => state.subject.errorMessage;
+export const selectTotalCount = (state) => state.subject.totalCount;
