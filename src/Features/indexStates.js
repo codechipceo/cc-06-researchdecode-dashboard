@@ -1,3 +1,4 @@
+// admin
 import {
   selectAdminInfo,
   selectAdminLoading,
@@ -6,6 +7,7 @@ import {
   selectAdminIsLoggedIn,
   adminLogin,
 } from "./Slices/adminSlice";
+// researchPapers
 import {
   createResearchPaper,
   deleteResearchPaper,
@@ -13,6 +15,7 @@ import {
   getByIdResearchPaper,
   updateResearchPaper,
 } from "./Slices/researchPaperSlice";
+
 import {
   selectAllResearchPapers,
   selectResearchPaperById,
@@ -21,6 +24,28 @@ import {
   selectResearchPaperLoading,
   selectTotalCount,
 } from "./Slices/researchPaperSlice";
+
+// subject slice method
+import { 
+  createSubject,
+  getAllSubject,
+  getByIdSubject,
+  updateSubject,
+  deleteSubject
+
+ } from "./Slices/subjectSlice";
+import { 
+  selectAllSubjects,
+  selectSubjectById,
+  selectSubjectError,
+  selectSubjectErrorMessage,
+  selectSubjectLoading,
+  selectTotalCount
+
+ } from "./Slices/subjectSlice";
+
+
+
 const reduxStore = {
   states: {
     adminInfo: selectAdminInfo,
@@ -34,6 +59,12 @@ const reduxStore = {
     selectResearchPaperErrorMessage,
     selectResearchPaperLoading,
     selectTotalCount,
+    selectAllSubjects,
+  selectSubjectById,
+  selectSubjectError,
+  selectSubjectErrorMessage,
+  selectSubjectLoading,
+  selectTotalCount
   },
 
   sliceMethods: {
@@ -43,6 +74,11 @@ const reduxStore = {
     getAllResearchPapers,
     getByIdResearchPaper,
     deleteResearchPaper,
+    createSubject,
+    getAllSubject,
+    getByIdSubject,
+    updateSubject,
+    deleteSubject
   },
 };
 
