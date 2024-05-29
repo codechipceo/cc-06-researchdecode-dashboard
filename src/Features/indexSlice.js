@@ -1,6 +1,7 @@
 import { adminSlice } from "./Slices/adminSlice";
 import { courseSlice } from "./Slices/courseSlice";
 import { researchPaperSlice } from "./Slices/researchPaperSlice";
-import { utilSlice } from "./Slices/utilSlice";
+import {subjectSlice} from "./Slices/subjectSlice"
 
-export { adminSlice, courseSlice, researchPaperSlice, utilSlice };
+
+export { adminSlice, courseSlice, researchPaperSlice, subjectSlice };
