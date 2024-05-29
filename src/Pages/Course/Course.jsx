@@ -1,131 +1,105 @@
-import { useEffect, useState } from "react";
-import { useCourse } from "../../Hooks/use-course";
+import { Button } from "@mui/material";
+import { useState } from "react";
 import DataTable from "../../Components/DataTable/DataTable";
-import Modal from "../../Components/Modal/Modal";
+import { FormComponent } from "../../Components/FormComponent/FormComponent";
+import { useCourse } from "../../Hooks/use-course";
+import { apiPayloads } from "../../Constants/payloads";
+import { formDefinitions } from "../../Constants/formsDefinitions";
+import { tableColumns } from "../../Constants/tableColumns";
+
+// constants
+const { courseForm } = formDefinitions;
+const { coursePayload } = apiPayloads;
+const { courseColumns } = tableColumns;
 
 export const Course = () => {
-  const {
-    courseData,
-    courseById,
-    isLoading,
-    isError,
-    errorMessage,
-    getById,
-    update,
-    deleteCourseById,
-    create,
-  } = useCourse();
-  const [showModal, setModal] = useState(false);
-  const [currentCourse, setCurrentCourse] = useState(null);
+  /*
+  ########################################################################
+          STATES
+  ########################################################################
+ */
 
-  const handleEdit = (course) => {
-    const  updatePayload  ={ courseId:course.id , ...course}
-    update(updatePayload)
-    setModal(true);
+  const [isForm, setForm] = useState(false);
+  const [status, setStatus] = useState(false);
+  const [currentCourse, setCurrentCourse] = useState({ ...coursePayload });
+
+  /*
+  ########################################################################
+          API HOOKS
+  ########################################################################
+ */
+  const { courseData, isLoading, isError, errorMessage, hooksInstance } =
+    useCourse();
+
+  /*
+  ########################################################################
+          HANDLER FUNCTIONS
+  ########################################################################
+ */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const data = { ...currentCourse };
+    data[name] = value;
+    setCurrentCourse(data);
   };
 
-  const handleDelete = (courseId) => {
-    deleteCourseById(courseId);
+  const handleEdit = (row) => {
+    const data = { ...row };
+    data.courseId = data._id;
+    setCurrentCourse(data);
+    setStatus("EDIT");
+    setForm(true);
   };
 
-  const handleSave = (courseData) => {
-    if (currentCourse) {
-      update({ ...courseData, id: currentCourse._id });
-    } else {
-      create(courseData);
-    }
-    setModal(false);
+  const handleSubmit = () => {
+    status === "CREATE"
+      ? hooksInstance.createDoc(currentCourse)
+      : hooksInstance.updateDoc(currentCourse);
   };
+  const onCancel = () => {
+    setStatus("");
+    setCurrentCourse({ ...coursePayload });
+    setForm(false);
+  };
+  const handleDelete = () => {};
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const columns = [
-    { field: "id", headerName: "ID", flex: 1 },
-    { field: "courseName", headerName: "Course Name", flex: 1 },
-    { field: "price", headerName: "Price", type: "number", flex: 1 },
-    { field: "courseLanguage", headerName: "Language", flex: 1 },
-    {
-      field: "enrolledCount",
-      headerName: "Enrolled Count",
-      type: "number",
-      flex: 1,
-    },
-
-    { field: "isActive", headerName: "Active", flex: 1 },
-  ];
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (isError) {
-  //   return <div>Error: {errorMessage}</div>;
-  // }
+  if (isError) {
+    return <div>Error: {errorMessage}</div>;
+  }
 
   return (
-    <div className='w-full'>
-        <DialogContent>
-        <DialogContentText>
-         {subTitle}
-        </DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="Course Name"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={courseName}
-          onChange={(e) => setCourseName(e.target.value)}
+    <>
+      {isForm === false ? (
+        <div className='w-full'>
+          <Button
+            onClick={() => {
+              setStatus("CREATE");
+              setForm(true);
+            }}
+          >
+            Create
+          </Button>
+          <DataTable
+            columns={courseColumns}
+            rows={courseData}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
+        </div>
+      ) : (
+        <FormComponent
+          formDefinition={courseForm}
+          formPayload={currentCourse}
+          status={status}
+          onCancel={onCancel}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
         />
-        <TextField
-          margin="dense"
-          label="Course Description"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={courseDescription}
-          onChange={(e) => setCourseDescription(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Price"
-          type="number"
-          fullWidth
-          variant="outlined"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Course Language"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={courseLanguage}
-          onChange={(e) => setCourseLanguage(e.target.value)}
-        />
-      </DialogContent>
-      <button
-        onClick={() => {
-          setCurrentCourse(null);
-          setModal(true);
-        }}
-      >
-        Create
-      </button>
-      <DataTable
-        columns={columns}
-        rows={courseData}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
-      <Modal
-        open={showModal}
-        handleClose={() => setModal(false)}
-        handleSave={handleSave}
-        initialData={currentCourse}
-        fields={courseData}
-      />
-    </div>
+      )}
+    </>
   );
 };
