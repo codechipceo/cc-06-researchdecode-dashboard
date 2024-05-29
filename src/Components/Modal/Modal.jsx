@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, TextField } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle
+} from "@mui/material";
+import PropTypes from "prop-types";
 
-const Modal = ({ open, handleClose, handleSave }) => {
-  const [courseName, setCourseName] = useState('');
-  const [courseDescription, setCourseDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [courseLanguage, setCourseLanguage] = useState('');
-
-  const handleSaveClick = () => {
-    const courseData = { courseName, courseDescription, price, courseLanguage };
-    handleSave(courseData);
-    handleClose();
-  };
-
+const Modal = ({ open, handleClose, handleSave, title, children }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>{title}</DialogTitle>
-    {children}
+      {children}
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color='primary'>
           Cancel
         </Button>
-        <Button onClick={handleSaveClick} color="primary">
+        <Button onClick={handleSave} color='primary'>
           Save
         </Button>
       </DialogActions>
