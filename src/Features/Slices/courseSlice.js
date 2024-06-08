@@ -5,9 +5,9 @@ import { ApiFeatures } from "../../Api/ApiRepo";
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("admin", "course", axiosInstance);
 
-// Async thunk for  creating course 
+// Async thunk for  creating course
 export const createCourse = createAsyncThunk(
-  "course/create", 
+  "course/create",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("create", payload);
@@ -163,8 +163,8 @@ export const courseSlice = createSlice({
       })
 
       // deleteCourse
-      
-      
+
+
       .addCase(deleteCourse.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -182,8 +182,8 @@ export const courseSlice = createSlice({
         state.errorMessage = action.payload;
       });
 
-      
-      
+
+
   },
 }).reducer;
 

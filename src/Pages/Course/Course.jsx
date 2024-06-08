@@ -6,6 +6,7 @@ import { useCourse } from "../../Hooks/use-course";
 import { apiPayloads } from "../../Constants/payloads";
 import { formDefinitions } from "../../Constants/formsDefinitions";
 import { tableColumns } from "../../Constants/tableColumns";
+import { Loading } from "../../Components/Loading/Loading";
 
 // constants
 const { courseForm } = formDefinitions;
@@ -64,7 +65,7 @@ export const Course = () => {
   const handleDelete = () => {};
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
@@ -74,7 +75,7 @@ export const Course = () => {
   return (
     <>
       {isForm === false ? (
-        <div className='w-full'>
+        <div className='w-full bg-red-500'>
           <Button
             onClick={() => {
               setStatus("CREATE");

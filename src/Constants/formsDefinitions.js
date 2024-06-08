@@ -1,7 +1,3 @@
-export const formDefinitions = {
-  courseForm: courseForm,
-};
-
 const courseForm = [
   {
     name: "courseName",
@@ -29,3 +25,6 @@ const courseForm = [
     ],
   },
 ];
+export const formDefinitions = {
+  courseForm: courseForm,
+};
