@@ -26,25 +26,33 @@ import {
 } from "./Slices/researchPaperSlice";
 
 // subject slice method
-import { 
+import {
   createSubject,
   getAllSubject,
   getByIdSubject,
   updateSubject,
-  deleteSubject
-
- } from "./Slices/subjectSlice";
-import { 
+  deleteSubject,
+} from "./Slices/subjectSlice";
+import {
   selectAllSubjects,
   selectSubjectById,
   selectSubjectError,
   selectSubjectErrorMessage,
   selectSubjectLoading,
-  selectTotalCount
-
- } from "./Slices/subjectSlice";
-
-
+} from "./Slices/subjectSlice";
+import {
+  createTeacher,
+  updateTeacher,
+  getAllTeachers,
+  getByIdTeacher,
+  deleteTeacher,
+  selectTeacherById,
+  selectTeacherErrorMessage,
+  selectTeacherErrorStatus,
+  selectTeachers,
+  selectTeacherLoadingStatus,
+  teacherTotalCount,
+} from "./Slices/teacherSlice";
 
 const reduxStore = {
   states: {
@@ -60,11 +68,16 @@ const reduxStore = {
     selectResearchPaperLoading,
     selectTotalCount,
     selectAllSubjects,
-  selectSubjectById,
-  selectSubjectError,
-  selectSubjectErrorMessage,
-  selectSubjectLoading,
-  selectTotalCount
+    selectSubjectById,
+    selectSubjectError,
+    selectSubjectErrorMessage,
+    selectSubjectLoading,
+    selectTeacherById,
+    selectTeacherErrorMessage,
+    selectTeacherErrorStatus,
+    selectTeachers,
+    selectTeacherLoadingStatus,
+    teacherTotalCount,
   },
 
   sliceMethods: {
@@ -78,7 +91,12 @@ const reduxStore = {
     getAllSubject,
     getByIdSubject,
     updateSubject,
-    deleteSubject
+    deleteSubject,
+    createTeacher,
+    updateTeacher,
+    getAllTeachers,
+    getByIdTeacher,
+    deleteTeacher,
   },
 };
 

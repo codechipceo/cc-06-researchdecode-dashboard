@@ -1,3 +1,4 @@
+import { Input } from "@mui/material";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -48,6 +49,18 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
                 </Select>
               </FormControl>
             </Box>
+          );
+        case "file":
+          return (
+            <FormControl>
+              <InputLabel htmlFor='file-upload'>Upload File</InputLabel>
+              <Input
+                id='file-upload'
+                type='file'
+                name={field.name}
+                onChange={handleChange}
+              />
+            </FormControl>
           );
         default:
           return null;
