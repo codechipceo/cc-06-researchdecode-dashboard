@@ -5,6 +5,7 @@ import { SideDrawer } from "./Components/Drawer/Drawer";
 import { selectAdminToken } from "./Features/Slices/adminSlice";
 import { useResponsive } from "./Hooks/use-responsive";
 import { Assignment, Course, Dashboard } from "./Pages/indexPages";
+import { Teachers } from "./Pages/Teachers/Teachers";
 
 function App() {
   const deviceType = useResponsive();
@@ -34,6 +35,10 @@ function App() {
               <Route
                 path='/courses'
                 element={<GuardComponents component={Course} />}
+              />
+              <Route
+                path='/teachers'
+                element={<GuardComponents component={Teachers} />}
               />
             </Routes>
           </div>

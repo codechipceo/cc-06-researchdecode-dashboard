@@ -3,15 +3,14 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("admin", "course", axiosInstance);
+const apiFeature = new ApiFeatures("admin", "teacher", axiosInstance);
 
-// Async thunk for  creating course
-export const createCourse = createAsyncThunk(
-  "course/create",
+// Async thunk for  creating Teacher
+export const createTeacher = createAsyncThunk(
+  "teacher/create",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("create", payload);
-      console.log(data,msg);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -19,9 +18,9 @@ export const createCourse = createAsyncThunk(
     }
   }
 );
-// GET ALL COURSE
-export const getAllCourse = createAsyncThunk(
-  "course/getall",
+// GET ALL TEACHER
+export const getAllTeachers = createAsyncThunk(
+  "teacher/getall",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg, count } = await apiFeature.create("getAll", payload);
@@ -34,8 +33,8 @@ export const getAllCourse = createAsyncThunk(
 );
 
 // GET BY ID
-export const getByIdCourse = createAsyncThunk(
-  "course/getById",
+export const getByIdTeacher = createAsyncThunk(
+  "teacher/getById",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("getById", payload);
@@ -47,9 +46,9 @@ export const getByIdCourse = createAsyncThunk(
   }
 );
 
-// UPDATE COURSE
-export const updateCourse = createAsyncThunk(
-  "course/update",
+// UPDATE TEACHER
+export const updateTeacher = createAsyncThunk(
+  "teacher/update",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("update", payload);
@@ -62,9 +61,9 @@ export const updateCourse = createAsyncThunk(
   }
 );
 
-// DELETE COURSE
-export const deleteCourse = createAsyncThunk(
-  "course/delete",
+// DELETE TEACHER
+export const deleteTeacher = createAsyncThunk(
+  "teacher/delete",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("delete", payload);
@@ -78,119 +77,90 @@ export const deleteCourse = createAsyncThunk(
 
 const initialState = {
   totalCount: 0,
-  courses: [],
-  courseById: {},
+  teachers: [],
+  teacherById: {},
   isLoading: false,
   isError: false,
   errorMessage: "",
 };
 
-export const courseSlice = createSlice({
-  name: "courseSlice",
+const teacherSlice = createSlice({
+  name: "teacher",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // createCourse
-      .addCase(createCourse.pending, (state) => {
+      .addCase(createTeacher.pending, (state) => {
         state.isLoading = true;
-        state.isError = false;
-        state.errorMessage = "";
       })
-      .addCase(createCourse.fulfilled, (state, action) => {
+      .addCase(createTeacher.fulfilled, (state) => {
         state.isLoading = false;
-        state.courses.push(action.payload.data);
+        // Update state with the newly created teacher if needed
       })
-      .addCase(createCourse.rejected, (state, action) => {
+      .addCase(createTeacher.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
-
-      // getAllCourse
-      .addCase(getAllCourse.pending, (state) => {
+      .addCase(getAllTeachers.pending, (state) => {
         state.isLoading = true;
-        state.isError = false;
-        state.errorMessage = "";
       })
-      .addCase(getAllCourse.fulfilled, (state, action) => {
+      .addCase(getAllTeachers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courses = action.payload.data;
+        state.teachers = action.payload.data;
         state.totalCount = action.payload.count;
       })
-      .addCase(getAllCourse.rejected, (state, action) => {
+      .addCase(getAllTeachers.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
-
-      // getByIdCourse
-      .addCase(getByIdCourse.pending, (state) => {
+      .addCase(getByIdTeacher.pending, (state) => {
         state.isLoading = true;
-        state.isError = false;
-        state.errorMessage = "";
       })
-      .addCase(getByIdCourse.fulfilled, (state, action) => {
+      .addCase(getByIdTeacher.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courseById = action.payload.data;
+        state.teacherById = action.payload.data;
       })
-      .addCase(getByIdCourse.rejected, (state, action) => {
+      .addCase(getByIdTeacher.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
-
-      // updateCourse
-      .addCase(updateCourse.pending, (state) => {
+      .addCase(updateTeacher.pending, (state) => {
         state.isLoading = true;
-        state.isError = false;
-        state.errorMessage = "";
       })
-      .addCase(updateCourse.fulfilled, (state, action) => {
-        console.log(action.payload);
+      .addCase(updateTeacher.fulfilled, (state) => {
         state.isLoading = false;
-        const index = state.courses.findIndex(
-          (course) => course._id === action.payload.data._id
-        );
-        if (index !== -1) {
-          state.courses[index] = action.payload.data;
-        }
+        // Update state with the updated teacher if needed
       })
-      .addCase(updateCourse.rejected, (state, action) => {
+      .addCase(updateTeacher.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
-
-      // deleteCourse
-
-
-      .addCase(deleteCourse.pending, (state) => {
+      .addCase(deleteTeacher.pending, (state) => {
         state.isLoading = true;
-        state.isError = false;
-        state.errorMessage = "";
       })
-      .addCase(deleteCourse.fulfilled, (state, action) => {
+      .addCase(deleteTeacher.fulfilled, (state) => {
         state.isLoading = false;
-        state.courses = state.courses.filter(
-          (course) => course._id !== action.payload.data._id
-        );
+        // Remove the deleted teacher from state if needed
       })
-      .addCase(deleteCourse.rejected, (state, action) => {
+      .addCase(deleteTeacher.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       });
-
-
-
   },
-}).reducer;
+});
 
-// Selectors
-export const selectAllCourses = (state) => state.course.courses;
-export const selectCourseById = (state) => state.course.courseById;
-export const selectCourseLoading = (state) => state.course.isLoading;
-export const selectCourseError = (state) => state.course.isError;
-export const selectCourseErrorMessage = (state) => state.course.errorMessage;
-export const selectTotalCount = (state) => state.course.totalCount;
+// export const {} = teacherSlice.actions;
+
+export const selectTeachers = (state) => state.teachers.teachers;
+export const selectTeacherById = (state) => state.teachers.teacherById;
+export const teacherTotalCount = (state) => state.teachers.totalCount;
+export const selectTeacherLoadingStatus = (state) => state.teachers.isLoading;
+export const selectTeacherErrorStatus = (state) => state.teachers.isError;
+export const selectTeacherErrorMessage = (state) => state.teachers.errorMessage;
+
+export default teacherSlice.reducer;

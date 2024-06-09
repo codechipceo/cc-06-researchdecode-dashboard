@@ -1,7 +1,3 @@
-export const tableColumns = {
-  courseColumns,
-};
-
 const courseColumns = [
   { field: "_id", headerName: "ID" },
   { field: "courseName", headerName: "Course Name", width: 400 },
@@ -15,3 +11,7 @@ const courseColumns = [
   },
   { field: "isActive", headerName: "Active", flex: 1 },
 ];
+
+export const tableColumns = {
+  courseColumns,
+};
