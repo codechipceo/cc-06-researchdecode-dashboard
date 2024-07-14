@@ -7,6 +7,7 @@ import { apiPayloads } from "../../Constants/payloads";
 import { formDefinitions } from "../../Constants/formsDefinitions";
 import { tableColumns } from "../../Constants/tableColumns";
 import { Loading } from "../../Components/Loading/Loading";
+import { useTeachers } from "../../Hooks/use-teachers";
 
 // constants
 const { courseForm } = formDefinitions;
@@ -31,6 +32,17 @@ export const Course = () => {
  */
   const { courseData, isLoading, isError, errorMessage, hooksInstance } =
     useCourse();
+  const { teachersData } = useTeachers();
+  const teachers = {
+    name: "instructor",
+    label: "Instructor",
+    type: "select",
+    options: teachersData,
+    displayKey: "name",
+  };
+  courseForm[7] = teachers;
+
+  console.log(courseForm)
 
   /*
   ########################################################################
@@ -56,6 +68,8 @@ export const Course = () => {
     status === "CREATE"
       ? hooksInstance.createDoc(currentCourse)
       : hooksInstance.updateDoc(currentCourse);
+
+    onCancel()
   };
   const onCancel = () => {
     setStatus("");

@@ -7,7 +7,6 @@ import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
 
 const DataTable = ({ rows, columns, handleEdit, handleDelete }) => {
   const [selectionModel, setSelectionModel] = useState([]);
-
   const actionColumn = {
     field: "actions",
     headerName: "Actions",

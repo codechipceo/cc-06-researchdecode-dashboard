@@ -12,6 +12,20 @@ const courseColumns = [
   { field: "isActive", headerName: "Active", flex: 1 },
 ];
 
+const videoColumns = [
+  { field: "_id", headerName: "ID", valueGetter:(params) =>{console.log(params.api) } },
+  { field: "videoTitle", headerName: "Title", flex:1},
+  {
+    field: "courseId.courseName",
+    headerName: "Course Name",
+    flex:1,
+    valueGetter: (params) => {
+    return  params.row?.courseId?.courseName;
+    },
+  },
+];
+
 export const tableColumns = {
   courseColumns,
+  videoColumns,
 };

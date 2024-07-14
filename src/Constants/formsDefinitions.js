@@ -45,9 +45,10 @@ const courseForm = [
     label: "Course Language",
     type: "select",
     options: [
-      { label: "English", value: "english" },
-      { label: "Hindi", value: "hindi" },
+      { label: "English", _id: "english" },
+      { label: "Hindi", _id: "hindi" },
     ],
+    displayKey: "label",
   },
 ];
 
@@ -94,7 +95,27 @@ const teacherForm = [
   },
 ];
 
+const videoForm = [
+  {
+    name: "videoTitle",
+    label: "Video Title",
+    type: "text",
+  },
+  {
+    name: "videoUrl",
+    label: "Video URL",
+    type: "file",
+  },
+  {
+    name: "courseId",
+    label: "Course Id",
+    type: "select",
+    options: [],
+    displayKey: "courseName",
+  },
+];
 export const formDefinitions = {
   courseForm: courseForm,
   teacherForm,
+  videoForm,
 };

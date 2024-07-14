@@ -6,6 +6,7 @@ import { selectAdminToken } from "./Features/Slices/adminSlice";
 import { useResponsive } from "./Hooks/use-responsive";
 import { Assignment, Course, Dashboard } from "./Pages/indexPages";
 import { Teachers } from "./Pages/Teachers/Teachers";
+import { Videos } from "./Pages/Videos/Videos";
 
 function App() {
   const deviceType = useResponsive();
@@ -39,6 +40,10 @@ function App() {
               <Route
                 path='/teachers'
                 element={<GuardComponents component={Teachers} />}
+              />
+              <Route
+                path='/videos'
+                element={<GuardComponents component={Videos} />}
               />
             </Routes>
           </div>

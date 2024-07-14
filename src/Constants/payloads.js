@@ -1,5 +1,5 @@
 const coursePayload = {
-  subjectId: "",
+  subjectId: "60d5ec4ee1b5b74a2c8a7a8c",
   courseName: "",
   courseDescription: "",
   courseExtras: "",
@@ -9,11 +9,9 @@ const coursePayload = {
   instructor: "",
   enrolledCount: "",
   courseLanguage: "",
-  isActive: "",
-  isDelete: "",
   createdBy: {
-    id: "",
-    model: "",
+    id: "60d5ec4ee1b5b74a2c8a7a8d",
+    model: "Teacher",
   },
 };
 
@@ -25,9 +23,17 @@ const teacherPayload = {
   experience: "",
   email: "",
   password: "",
-  contactNumber:""
+  contactNumber: "",
 };
+
+const videosPayload = {
+  videoTitle: "",
+  videoUrl: "",
+  courseId: "",
+};
+
 export const apiPayloads = {
   coursePayload,
   teacherPayload,
+  videosPayload,
 };

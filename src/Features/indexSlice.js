@@ -3,6 +3,7 @@ import { courseSlice } from "./Slices/courseSlice";
 import { researchPaperSlice } from "./Slices/researchPaperSlice";
 import { subjectSlice } from "./Slices/subjectSlice";
 import teacherSlice from "./Slices/teacherSlice";
+ import videoSlice from "./Slices/videoSlice";
 
 export {
   adminSlice,
@@ -10,4 +11,5 @@ export {
   researchPaperSlice,
   subjectSlice,
   teacherSlice,
+  videoSlice
 };

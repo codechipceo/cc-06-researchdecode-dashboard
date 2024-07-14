@@ -4,6 +4,7 @@ import {
   courseSlice,
   researchPaperSlice,
   teacherSlice,
+  videoSlice,
 } from "../Features/indexSlice";
 
 const reducers = combineReducers({
@@ -11,6 +12,7 @@ const reducers = combineReducers({
   course: courseSlice,
   researchPaper: researchPaperSlice,
   teachers: teacherSlice,
+  videos: videoSlice,
 });
 
 export const store = configureStore({

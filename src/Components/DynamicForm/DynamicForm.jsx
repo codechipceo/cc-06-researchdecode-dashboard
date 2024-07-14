@@ -1,4 +1,4 @@
-import { Input } from "@mui/material";
+import { Input, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -16,24 +16,30 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
         case "password":
         case "number":
           return (
-            <TextField
-              margin='normal'
-              size='small'
-              name={field.name}
-              fullWidth
-              label={field.label}
-              type={field.type}
-              value={formData[field.name]}
-              onChange={handleChange}
-              autoFocus
-              variant='standard'
-            />
+            <Box mt={2} mb={1}>
+              <Typography>{field.label}</Typography>
+
+              <TextField
+                margin='normal'
+                size='small'
+                name={field.name}
+                fullWidth
+                label={field.label}
+                type={field.type}
+                value={formData[field.name]}
+                onChange={handleChange}
+                autoFocus
+                variant='filled'
+              />
+            </Box>
           );
         case "select":
           return (
             <Box key={field.name} mb={2}>
+              <Typography my={2}>{field.label}</Typography>
               <FormControl fullWidth variant='outlined'>
                 <InputLabel>{field.label}</InputLabel>
+
                 <Select
                   size='small'
                   name={field.name}
@@ -41,11 +47,13 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
                   onChange={handleChange}
                   label={field.label}
                 >
-                  {field.options.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
+                  {field.options.map((option) => {
+                    return (
+                      <MenuItem key={option.value} value={option._id}>
+                        {option[field.displayKey]}
+                      </MenuItem>
+                    );
+                  })}
                 </Select>
               </FormControl>
             </Box>
