@@ -13,7 +13,7 @@ const courseColumns = [
 ];
 
 const videoColumns = [
-  { field: "_id", headerName: "ID", valueGetter:(params) =>{console.log(params.api) } },
+  { field: "_id", headerName: "ID", },
   { field: "videoTitle", headerName: "Title", flex:1},
   {
     field: "courseId.courseName",

@@ -11,7 +11,6 @@ export const createSubject = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("create", payload);
-      console.log(data,msg);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -53,7 +52,6 @@ export const updateSubject = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.update("update", payload);
-      console.log(data);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -147,7 +145,6 @@ export const subjectSlice = createSlice({
         state.errorMessage = "";
       })
       .addCase(updateSubject.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoading = false;
         const index = state.subjects.findIndex(
           (subject) => subject._id === action.payload.data._id
@@ -163,8 +160,8 @@ export const subjectSlice = createSlice({
       })
 
       // deletesubject
-      
-      
+
+
       .addCase(deleteSubject.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -182,8 +179,8 @@ export const subjectSlice = createSlice({
         state.errorMessage = action.payload;
       });
 
-      
-      
+
+
   },
 }).reducer;
 

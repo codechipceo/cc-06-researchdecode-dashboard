@@ -67,7 +67,6 @@ export const Course = ({ loggedinUser }) => {
         formData.append(key, currentCourse[key]);
       });
       formData.append("instructor", loggedinUser._id);
-      console.log(formData);
       hooksInstance.createDoc(formData);
     } else {
       hooksInstance.updateDoc(currentCourse);

@@ -52,7 +52,6 @@ export const updateTeacher = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("update", payload);
-      console.log(data);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
