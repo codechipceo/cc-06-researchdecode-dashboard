@@ -12,6 +12,7 @@ export const adminLogin = createAsyncThunk(
     try {
       const { data, msg } = await apiFeature.create("signIn", payload);
       localStorage.setItem("adminToken", data.token);
+      localStorage.setItem("adminInfo", JSON.stringify(data.profile));
 
       return { data, msg };
     } catch (error) {
@@ -23,7 +24,7 @@ export const adminLogin = createAsyncThunk(
 
 // Initial state for admin login slice
 const initialState = {
-  adminInfo: null,
+  adminInfo: JSON.parse(localStorage.getItem("adminInfo")),
   isLoading: false,
   isError: false,
   errorMessage: "",
@@ -45,7 +46,7 @@ export const adminSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(adminLogin.fulfilled, (state, { payload }) => {
-        state.adminInfo = payload.data;
+        state.adminInfo = payload.data.profile;
         state.adminToken = payload.data.token;
         state.isLoggedIn = true;
         state.isLoading = false;

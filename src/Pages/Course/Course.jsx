@@ -8,13 +8,15 @@ import { formDefinitions } from "../../Constants/formsDefinitions";
 import { tableColumns } from "../../Constants/tableColumns";
 import { Loading } from "../../Components/Loading/Loading";
 import { useTeachers } from "../../Hooks/use-teachers";
+import { useSelector } from "react-redux";
+import { selectAdminInfo } from "../../Features/Slices/adminSlice";
 
 // constants
 const { courseForm } = formDefinitions;
 const { coursePayload } = apiPayloads;
 const { courseColumns } = tableColumns;
 
-export const Course = () => {
+export const Course = ({ loggedinUser }) => {
   /*
   ########################################################################
           STATES
@@ -32,17 +34,6 @@ export const Course = () => {
  */
   const { courseData, isLoading, isError, errorMessage, hooksInstance } =
     useCourse();
-  const { teachersData } = useTeachers();
-  const teachers = {
-    name: "instructor",
-    label: "Instructor",
-    type: "select",
-    options: teachersData,
-    displayKey: "name",
-  };
-  courseForm[7] = teachers;
-
-  console.log(courseForm)
 
   /*
   ########################################################################
@@ -52,7 +43,11 @@ export const Course = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const data = { ...currentCourse };
-    data[name] = value;
+    if (e.target.files) {
+      data[name] = e.target.files[0];
+    } else {
+      data[name] = value;
+    }
     setCurrentCourse(data);
   };
 
@@ -65,11 +60,20 @@ export const Course = () => {
   };
 
   const handleSubmit = () => {
-    status === "CREATE"
-      ? hooksInstance.createDoc(currentCourse)
-      : hooksInstance.updateDoc(currentCourse);
+    const formData = new FormData();
 
-    onCancel()
+    if (status === "CREATE") {
+      Object.keys(currentCourse).forEach((key) => {
+        formData.append(key, currentCourse[key]);
+      });
+      formData.append("instructor", loggedinUser._id);
+      console.log(formData);
+      hooksInstance.createDoc(formData);
+    } else {
+      hooksInstance.updateDoc(currentCourse);
+    }
+
+    // onCancel();
   };
   const onCancel = () => {
     setStatus("");

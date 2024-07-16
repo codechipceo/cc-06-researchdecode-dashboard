@@ -1,10 +1,5 @@
 const courseForm = [
   {
-    name: "subjectId",
-    label: "Subject Id",
-    type: "text",
-  },
-  {
     name: "courseName",
     label: "Course Name",
     type: "text",
@@ -27,18 +22,12 @@ const courseForm = [
   {
     name: "courseThumbnail",
     label: "Course Thumbnail",
-    type: "text",
+    type: "file",
   },
   {
     name: "courseBanner",
     label: "Course Banner",
-    type: "text",
-  },
-  {
-    name: "instructor",
-    label: "Instructor",
-    type: "select",
-    options: [],
+    type: "file",
   },
   {
     name: "courseLanguage",

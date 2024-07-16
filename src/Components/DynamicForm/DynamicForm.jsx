@@ -60,15 +60,19 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
           );
         case "file":
           return (
+            <Box display={'flex'}>
+              <Typography>{ field.label}</Typography>
+
             <FormControl>
-              <InputLabel htmlFor='file-upload'>Upload File</InputLabel>
-              <Input
+                <Input
+                  fullWidth
                 id='file-upload'
                 type='file'
                 name={field.name}
                 onChange={handleChange}
               />
             </FormControl>
+            </Box>
           );
         default:
           return null;

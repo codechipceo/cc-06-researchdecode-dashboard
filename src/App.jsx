@@ -2,15 +2,18 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SideDrawer } from "./Components/Drawer/Drawer";
-import { selectAdminToken } from "./Features/Slices/adminSlice";
+import {
+  selectAdminInfo,
+  selectAdminToken,
+} from "./Features/Slices/adminSlice";
 import { useResponsive } from "./Hooks/use-responsive";
-import { Assignment, Course, Dashboard } from "./Pages/indexPages";
+import { Assignment, Course, Dashboard, Login } from "./Pages/indexPages";
 import { Teachers } from "./Pages/Teachers/Teachers";
 import { Videos } from "./Pages/Videos/Videos";
 
 function App() {
   const deviceType = useResponsive();
-  const token = useSelector(selectAdminToken) ?? "Token";
+  const token = useSelector(selectAdminToken);
   const drawerWidth = token ? 240 : 0;
 
   return (
@@ -57,15 +60,16 @@ export default App;
 
 function GuardComponents({ component: Component }) {
   const token = useSelector(selectAdminToken);
+  const loggedinUser = useSelector(selectAdminInfo);
 
-  // if (!token) {
-  //   return <Login />;
-  // }
+  if (!token) {
+    return <Login />;
+  }
 
   // condition
   const rest = {
     token: token,
-    userRole: "ADMIN",
+    loggedinUser,
   };
 
   return <Component {...rest} />;
