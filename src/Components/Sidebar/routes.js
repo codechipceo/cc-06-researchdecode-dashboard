@@ -18,59 +18,51 @@ export const routes = [
     path: "/",
     icon: Dashboard,
   },
-  {
-    name: "Assignments",
-    path: "/assignments",
-    icon: AssignmentSharpIcon,
-  },
+  // {
+  //   name: "Assignments",
+  //   path: "/assignments",
+  //   icon: AssignmentSharpIcon,
+  // },
   {
     name: "Courses",
     path: "/courses",
     icon: CallSplitSharpIcon,
   },
   {
-    name: "Lab Reports",
-    path: "/lab-reports",
-    icon: ScienceSharpIcon,
+    name: "Videos",
+    path: "/videos",
+    icon: VideoLibrarySharpIcon,
   },
-  {
-    name: "Profiles",
-    path: "/profiles",
-    icon: PersonSharpIcon,
-  },
+  // {
+  //   name: "Lab Reports",
+  //   path: "/lab-reports",
+  //   icon: ScienceSharpIcon,
+  // },
+  // {
+  //   name: "Profiles",
+  //   path: "/profiles",
+  //   icon: PersonSharpIcon,
+  // },
   {
     name: "Research Papers",
     path: "/research-papers",
     icon: MenuBookSharpIcon,
   },
-  {
-    name: "Students",
-    path: "/students",
-    icon: PeopleSharpIcon,
-  },
-  {
-    name: "Subjects",
-    path: "/subjects",
-    icon: SubjectSharpIcon,
-  },
-  {
-    name: "Teachers",
-    path: "/teachers",
-    icon: SchoolSharpIcon,
-  },
-  {
-    name: "Videos",
-    path: "/videos",
-    icon: VideoLibrarySharpIcon,
-  },
-  {
-    name: "Orders",
-    path: "/orders",
-    icon: LocalShippingSharpIcon,
-  },
-  {
-    name: "Employees",
-    path: "/employees",
-    icon: SupportAgentSharpIcon,
-  }
+  // {
+  //   name: "Students",
+  //   path: "/students",
+  //   icon: PeopleSharpIcon,
+  // },
+
+  // {
+  //   name: "Teachers",
+  //   path: "/teachers",
+  //   icon: SchoolSharpIcon,
+  // },
+
+  // {
+  //   name: "Orders",
+  //   path: "/orders",
+  //   icon: LocalShippingSharpIcon,
+  // },
 ];
