@@ -14,6 +14,11 @@ const CreateIcon = ({ MyIcon }) => {
   return MyIcon ? <MyIcon sx={{ color: "black" }} /> : null;
 };
 
+const logout = () => {
+  localStorage.removeItem("adminToken");
+  window.location.href = "/";
+};
+
 CreateIcon.propTypes = {
   MyIcon: PropTypes.elementType.isRequired,
 };
@@ -46,11 +51,17 @@ export const Sidebar = () => {
                 <CreateIcon MyIcon={icon} />
               </ListItemIcon>
               <ListItemText primary={name} />
-              {subMenu ? (open === mainIndex ? <ExpandLess /> : <ExpandMore />) : null}
+              {subMenu ? (
+                open === mainIndex ? (
+                  <ExpandLess />
+                ) : (
+                  <ExpandMore />
+                )
+              ) : null}
             </ListItemButton>
             {subMenu && (
-              <Collapse in={open === mainIndex} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+              <Collapse in={open === mainIndex} timeout='auto' unmountOnExit>
+                <List component='div' disablePadding>
                   {subMenu.map((subRoute, index) => {
                     const { path, name, icon } = subRoute;
                     return (
@@ -74,6 +85,14 @@ export const Sidebar = () => {
           </div>
         );
       })}
+
+      <ListItemButton
+        onClick={() => {
+          logout();
+        }}
+      >
+        <ListItemText primary={"Log Out"} />
+      </ListItemButton>
     </List>
   );
 };

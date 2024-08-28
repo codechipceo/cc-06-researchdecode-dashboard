@@ -18,6 +18,11 @@ export const routes = [
     path: "/",
     icon: Dashboard,
   },
+  {
+    name: "Inbox",
+    path: "/inbox",
+    icon: Dashboard,
+  },
   // {
   //   name: "Assignments",
   //   path: "/assignments",

@@ -10,6 +10,9 @@ import { useResponsive } from "./Hooks/use-responsive";
 import { Assignment, Course, Dashboard, Login } from "./Pages/indexPages";
 import { Teachers } from "./Pages/Teachers/Teachers";
 import { Videos } from "./Pages/Videos/Videos";
+import { Inbox } from "./Pages/Chat/Inbox";
+import { Chat } from "./Pages/Chat/Chat";
+import Videocall from "./Pages/Chat/Videocall";
 
 function App() {
   const deviceType = useResponsive();
@@ -40,6 +43,15 @@ function App() {
                 path='/courses'
                 element={<GuardComponents component={Course} />}
               />
+              <Route
+                path='/inbox'
+                element={<GuardComponents component={Inbox} />}
+              />
+              <Route
+                path='/inbox/:userId'
+                element={<GuardComponents component={Chat} />}
+              />
+              <Route path="/videocall/:peerId" element={ <Videocall />} />
               <Route
                 path='/teachers'
                 element={<GuardComponents component={Teachers} />}
