@@ -15,56 +15,88 @@ function Videocall() {
   const peerInstance = useRef();
   const { peerId } = useParams();
   const info = useSelector(selectAdminInfo);
-  useEffect(() => {
-    // Create Peer instance
-    const peer = new Peer(info._id);
-    peerInstance.current = peer;
+useEffect(() => {
+  // Create Peer instance
+  const peer = new Peer(info._id);
+  peerInstance.current = peer;
 
-    // Get user's video and audio stream
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((stream) => {
-        // Display my video stream
-        myVideo.current.srcObject = stream;
+  // Get user's video and audio stream
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: true })
+    .then((stream) => {
+      // Display my video stream
+      myVideo.current.srcObject = stream;
 
-        // Answer incoming call
-        peer.on("call", (call) => {
+      // Answer incoming call
+      peer.on("call", (call) => {
+        try {
           call.answer(stream); // Answer the call with your own video/audio stream
           setCurrentCall(call); // Save the call to the state
           call.on("stream", (userVideoStream) => {
             userVideo.current.srcObject = userVideoStream; // Show the remote video stream
           });
-        });
+        } catch (error) {
+          console.error("Error answering the call:", error);
+        }
       });
-
-    // Set my PeerJS ID
-    peer.on("open", (id) => {
-      setMyId(id);
+    })
+    .catch((error) => {
+      console.error("Error accessing media devices:", error);
     });
 
-    // Handle new user connection
-    socket.on("connection", (userId) => {
-      console.log("User connected:", userId);
-    });
+  // Set my PeerJS ID
+  peer.on("open", (id) => {
+    setMyId(id);
+  });
 
-    // Handle user disconnection
-    socket.on("user-disconnected", (userId) => {
-      console.log("User disconnected:", userId);
-    });
-  }, []);
+  // Handle Peer connection errors
+  peer.on("error", (error) => {
+    console.error("PeerJS error:", error);
+  });
 
-  // Function to call another user by ID
-  const callUser = (userId) => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((stream) => {
+  // Handle new user connection
+  socket.on("connection", (userId) => {
+    console.log("User connected:", userId);
+  });
+
+  // Handle user disconnection
+  socket.on("user-disconnected", (userId) => {
+    console.log("User disconnected:", userId);
+  });
+
+  // Cleanup function to close the Peer connection and remove socket listeners
+  return () => {
+    if (peerInstance.current) {
+      peerInstance.current.destroy();
+    }
+    socket.off("connection");
+    socket.off("user-disconnected");
+  };
+}, []);
+
+// Function to call another user by ID
+const callUser = (userId) => {
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: true })
+    .then((stream) => {
+      try {
         const call = peerInstance.current.call(userId, stream);
         setCurrentCall(call); // Save the call to the state
         call.on("stream", (userVideoStream) => {
           userVideo.current.srcObject = userVideoStream; // Show the remote video stream
         });
-      });
-  };
+        call.on("error", (error) => {
+          console.error("Error during the call:", error);
+        });
+      } catch (error) {
+        console.error("Error calling the user:", error);
+      }
+    })
+    .catch((error) => {
+      console.error("Error accessing media devices:", error);
+    });
+};
+
 
   // Function to end the current call
   const endCall = () => {
