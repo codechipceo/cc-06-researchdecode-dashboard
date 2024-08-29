@@ -17,7 +17,18 @@ function Videocall() {
   const info = useSelector(selectAdminInfo);
 useEffect(() => {
   // Create Peer instance
-  const peer = new Peer(info._id);
+  const peer = new Peer(info._id, {
+    config: {
+      iceServers: [
+        { url: "stun:stun.l.google.com:19302" }, // Public STUN server
+        {
+          url: "turn:13.235.36.252:3478",
+          username: "user",
+          credential: "H4iauI7gCpy39KxS9JoyeCzQzrnL4JGd",
+        },
+      ],
+    },
+  });
   peerInstance.current = peer;
 
   // Get user's video and audio stream
