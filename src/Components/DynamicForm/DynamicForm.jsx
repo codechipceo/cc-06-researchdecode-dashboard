@@ -5,6 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import RichTextEditor from "../RichTextEditor/RichTextEditor";
 
 export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
   // Render form fields
@@ -60,18 +61,30 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
           );
         case "file":
           return (
-            <Box display={'flex'}>
-              <Typography>{ field.label}</Typography>
+            <Box display={"flex"}>
+              <Typography>{field.label}</Typography>
 
-            <FormControl>
+              <FormControl>
                 <Input
                   fullWidth
-                id='file-upload'
-                type='file'
-                name={field.name}
-                onChange={handleChange}
+                  id='file-upload'
+                  type='file'
+                  name={field.name}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </Box>
+          );
+        case "richText": // New case for Rich Text Editor
+          return (
+            <Box mt={2} mb={1} key={field.name}>
+              <Typography>{field.label}</Typography>
+              <RichTextEditor
+                value={formData[field.name]}
+                handleChange={(value) =>
+                  handleChange({ target: { name: field.name, value } })
+                }
               />
-            </FormControl>
             </Box>
           );
         default:

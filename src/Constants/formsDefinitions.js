@@ -7,7 +7,7 @@ const courseForm = [
   {
     name: "courseDescription",
     label: "Course Description",
-    type: "text",
+    type: "richText",
   },
   {
     name: "courseExtras",
