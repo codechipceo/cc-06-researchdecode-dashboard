@@ -6,6 +6,7 @@ import {
   teacherSlice,
   videoSlice,
   consultancySlice,
+  labSlice,
 } from "../Features/indexSlice";
 
 const reducers = combineReducers({
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   teachers: teacherSlice,
   videos: videoSlice,
   consultancy: consultancySlice,
+  labs: labSlice,
 });
 
 export const store = configureStore({
