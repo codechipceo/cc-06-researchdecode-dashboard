@@ -29,6 +29,11 @@ export const Videos = () => {
   const [status, setStatus] = useState(false);
   const [videoObj, setVideoObj] = useState({ ...videosPayload });
 
+  const samplePayload={
+    videoTitle: '',
+      videoUrl: '',
+        courseId:''
+}
   /*
   ########################################################################
           API HOOKS
