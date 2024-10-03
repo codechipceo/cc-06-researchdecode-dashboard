@@ -117,6 +117,7 @@ const LabPage = () => {
             onCancel={onCancel}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            notShowButton={true}
           />
           {labPayload.isPaid ? (
             <FormComponent
@@ -132,6 +133,7 @@ const LabPage = () => {
               onCancel={onCancel}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
+              notShowButton={true}
             />
           ) : null}
           <div>
