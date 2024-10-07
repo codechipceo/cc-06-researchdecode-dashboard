@@ -11,6 +11,7 @@ import ScienceSharpIcon from "@mui/icons-material/ScienceSharp";
 import SubjectSharpIcon from "@mui/icons-material/SubjectSharp";
 import SupportAgentSharpIcon from "@mui/icons-material/SupportAgentSharp";
 import VideoLibrarySharpIcon from "@mui/icons-material/VideoLibrarySharp";
+import ScienceIcon from "@mui/icons-material/Science";
 
 export const routes = [
   {
@@ -23,6 +24,7 @@ export const routes = [
     path: "/inbox",
     icon: Dashboard,
   },
+
   // {
   //   name: "Assignments",
   //   path: "/assignments",
@@ -52,6 +54,11 @@ export const routes = [
     name: "Research Papers",
     path: "/research-papers",
     icon: MenuBookSharpIcon,
+  },
+  {
+    name: "Lab",
+    path: "/lab",
+    icon: ScienceIcon,
   },
   // {
   //   name: "Students",

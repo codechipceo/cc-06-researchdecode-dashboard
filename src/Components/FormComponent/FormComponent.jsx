@@ -8,6 +8,7 @@ export const FormComponent = ({
   onCancel,
   handleChange,
   handleSubmit,
+  notShowButton,
 }) => {
   return (
     <div>
@@ -16,12 +17,14 @@ export const FormComponent = ({
         formDefinition={formDefinition}
         handleChange={handleChange}
       />
-      <div>
-        <Button onClick={handleSubmit}>
-          {status === "CREATE" ? "Create" : "Update"}
-        </Button>
-        <Button onClick={() => onCancel()}>Cancel</Button>
-      </div>
+      {notShowButton ? null : (
+        <div>
+          <Button onClick={handleSubmit}>
+            {status === "CREATE" ? "Create" : "Update"}
+          </Button>
+          <Button onClick={() => onCancel()}>Cancel</Button>
+        </div>
+      )}
     </div>
   );
 };

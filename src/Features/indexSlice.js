@@ -4,13 +4,16 @@ import { researchPaperSlice } from "./Slices/researchPaperSlice";
 import { subjectSlice } from "./Slices/subjectSlice";
 import teacherSlice from "./Slices/teacherSlice";
 import videoSlice from "./Slices/videoSlice";
-import consultancySlice from './Slices/consultancySlice'
+import consultancySlice from "./Slices/consultancySlice";
+import labSlice from "./Slices/labSlice";
 
-export {consultancySlice,
+export {
+  consultancySlice,
   adminSlice,
   courseSlice,
   researchPaperSlice,
   subjectSlice,
   teacherSlice,
-  videoSlice
+  labSlice,
+  videoSlice,
 };
