@@ -103,8 +103,53 @@ const videoForm = [
     displayKey: "courseName",
   },
 ];
+
+const labForm = [
+  {
+    name: "title",
+    label: "Title",
+    type: "text",
+  },
+  {
+    name: "description",
+    label: "Description",
+    type: "text",
+  },
+  {
+    name: "maxStudentsAllowed",
+    label: "Maximum students allowed",
+    type: "number",
+  },
+  {
+    name: "labType",
+    label: "Lab Type",
+    type: "text",
+  },
+  {
+    name: "labLocation",
+    label: "Lab Location",
+    type: "text",
+  },
+  {
+    name: "status",
+    label: "Lab status",
+    type: "select",
+    options: [
+      { status: "Available", _id: "Available" },
+      { status: "In Use", _id: "In Use" },
+      { status: "Under Maintenance", _id: "Under Maintenance" },
+    ],
+    displayKey: "status",
+  },
+  {
+    name: "isPaid",
+    label: "Is Paid",
+    type: "switch",
+  },
+];
 export const formDefinitions = {
   courseForm: courseForm,
   teacherForm,
   videoForm,
+  labForm,
 };

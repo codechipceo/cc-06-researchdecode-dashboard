@@ -6,12 +6,27 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import RichTextEditor from "../RichTextEditor/RichTextEditor";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
   // Render form fields
   const renderFormFields = () => {
     return formDefinition.map((field) => {
       switch (field.type) {
+        case "switch":
+          return (
+            <Box mx={0}>
+              <FormControlLabel
+                value={formData[field.name]}
+                name={field.name}
+                control={<Switch key={field.name} mx={0} />}
+                onChange={handleChange}
+                label={field.label}
+                labelPlacement="start"
+              />
+            </Box>
+          );
         case "text":
         case "email":
         case "password":
@@ -21,8 +36,8 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
               <Typography>{field.label}</Typography>
 
               <TextField
-                margin='normal'
-                size='small'
+                margin="normal"
+                size="small"
                 name={field.name}
                 fullWidth
                 label={field.label}
@@ -30,7 +45,7 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
                 value={formData[field.name]}
                 onChange={handleChange}
                 autoFocus
-                variant='filled'
+                variant="filled"
               />
             </Box>
           );
@@ -38,11 +53,13 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
           return (
             <Box key={field.name} mb={2}>
               <Typography my={2}>{field.label}</Typography>
-              <FormControl fullWidth variant='outlined'>
-                <InputLabel>{field.label}</InputLabel>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel id={field.label} size="small">
+                  {field.label}
+                </InputLabel>
 
                 <Select
-                  size='small'
+                  size="small"
                   name={field.name}
                   value={formData[field.name]}
                   onChange={handleChange}
@@ -67,8 +84,8 @@ export const DynamicForm = ({ formDefinition, formData, handleChange }) => {
               <FormControl>
                 <Input
                   fullWidth
-                  id='file-upload'
-                  type='file'
+                  id="file-upload"
+                  type="file"
                   name={field.name}
                   onChange={handleChange}
                 />

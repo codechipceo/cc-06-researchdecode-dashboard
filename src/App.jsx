@@ -13,6 +13,7 @@ import { Videos } from "./Pages/Videos/Videos";
 import { Inbox } from "./Pages/Chat/Inbox";
 import { Chat } from "./Pages/Chat/Chat";
 import Videocall from "./Pages/Chat/Videocall";
+import LabPage from "./Pages/Lab/LabPage";
 
 function App() {
   const deviceType = useResponsive();
@@ -32,34 +33,36 @@ function App() {
           >
             <Routes>
               <Route
-                path='/'
+                path="/"
                 element={<GuardComponents component={Dashboard} />}
               />
               <Route
-                path='/assignments'
+                path="/assignments"
                 element={<GuardComponents component={Assignment} />}
               />
               <Route
-                path='/courses'
+                path="/courses"
                 element={<GuardComponents component={Course} />}
               />
               <Route
-                path='/inbox'
+                path="/inbox"
                 element={<GuardComponents component={Inbox} />}
               />
               <Route
-                path='/inbox/:userId'
+                path="/inbox/:userId"
                 element={<GuardComponents component={Chat} />}
               />
-              <Route path="/videocall/:peerId" element={ <Videocall />} />
+              <Route path="/videocall/:peerId" element={<Videocall />} />
               <Route
-                path='/teachers'
+                path="/teachers"
                 element={<GuardComponents component={Teachers} />}
               />
               <Route
-                path='/videos'
+                path="/videos"
                 element={<GuardComponents component={Videos} />}
               />
+
+              <Route path="/lab" element={<LabPage />} />
             </Routes>
           </div>
         </div>
