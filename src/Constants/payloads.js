@@ -6,7 +6,6 @@ const coursePayload = {
   courseThumbnail: "",
   courseBanner: "",
   courseLanguage: "",
-
 };
 
 const teacherPayload = {
@@ -26,8 +25,21 @@ const videosPayload = {
   courseId: "",
 };
 
+const labPayload = {
+  title: "",
+  description: "",
+  maxStudentsAllowed: 20,
+  isPaid: false,
+  labType: "",
+  labLocation: "",
+  status: "Available",
+  price: 100,
+  totalRequests: 0,
+};
+
 export const apiPayloads = {
   coursePayload,
   teacherPayload,
   videosPayload,
+  labPayload,
 };
