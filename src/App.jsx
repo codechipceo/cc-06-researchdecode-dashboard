@@ -62,7 +62,10 @@ function App() {
                 element={<GuardComponents component={Videos} />}
               />
 
-              <Route path="/lab" element={<LabPage />} />
+              <Route
+                path="/lab"
+                element={<GuardComponents component={LabPage} />}
+              />
             </Routes>
           </div>
         </div>
